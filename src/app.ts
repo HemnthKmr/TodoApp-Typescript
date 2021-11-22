@@ -29,7 +29,7 @@ addBtn.onclick = () => {
     showTasks();
 }
 
-const showTasks = async () => {
+const showTasks = () => {
     newLiTag = "";
     pendingNumber.textContent = `${listArr.length}`;
     listArr.forEach((element: any, index: number) => {

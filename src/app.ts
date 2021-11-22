@@ -1,42 +1,56 @@
 const inputBox = <HTMLInputElement>document.querySelector(".inputSection input")!;
 const addBtn = <HTMLButtonElement>document.querySelector(".inputSection button");
-const todoList = <HTMLButtonElement>document.querySelector(".TodoList");
+const todoList = <HTMLElement>document.querySelector(".TodoList");
+const pendingNumber = <HTMLElement>document.querySelector(".pendingNumber");
+const clearAllBtn = <HTMLButtonElement>document.querySelector(".clearAll")
 let listArr: string[];
+let userData: string;
+let newLiTag: string;
 
 inputBox.onkeyup = () => {
-    let userData = inputBox.value;
-    (userData.trim()) ? addBtn.disabled = false :  addBtn.disabled = true;
+    userData = inputBox.value;
+    (userData.trim()) ? addBtn.disabled = false : addBtn.disabled = true;
 }
 
-addBtn.onclick = () => {
-    let userData = inputBox.value;
+const getData = () => {
     let getLocalStorage = localStorage.getItem("Todo");
-    if(getLocalStorage == null){
+    if (getLocalStorage == null) {
         listArr = [];
     }
-    else{
+    else {
         listArr = JSON.parse(getLocalStorage)
     }
-    listArr.push(userData);
-    localStorage.setItem("Todo",JSON.stringify(listArr));
     showTasks();
 }
 
-const showTasks = () => {
-    let getLocalStorage = localStorage.getItem("Todo");
-    
-    if(getLocalStorage == null){
-        listArr = [];
-    }
-    else{
-        listArr = JSON.parse(getLocalStorage)
-    }
-    let newLiTag = '';
-    listArr.forEach((element,index) => {
-       newLiTag = `<p>${element}  <button onclick=deleteTask(${index})>Delete</button></p>`
-    });
-    todoList.innerHTML += newLiTag;
-    inputBox.value="";
+addBtn.onclick = () => {
+    listArr.push(userData);
+    localStorage.setItem("Todo", JSON.stringify(listArr));
+    showTasks();
 }
 
-showTasks();
+const showTasks = async () => {
+    newLiTag = "";
+    pendingNumber.textContent = `${listArr.length}`;
+    listArr.forEach((element: any, index: number) => {
+        newLiTag += `<p>${element}  <button onclick=deleteTask(${index})>Delete</button></p>`
+    });
+    todoList.innerHTML = newLiTag;
+    inputBox.value = "";
+}
+
+const deleteTask = (index: number) => {
+    listArr.splice(index, 1)
+    localStorage.setItem("Todo", JSON.stringify(listArr));
+    showTasks();
+}
+
+clearAllBtn.onclick = () => {
+    listArr = [];
+    localStorage.setItem("Todo", JSON.stringify(listArr));
+    showTasks();
+}
+
+getData();
+
+

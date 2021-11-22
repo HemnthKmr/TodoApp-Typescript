@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo App</title>
-    <script src="./dist/app.js" defer></script>
-  </head>
-  <body>
-      <div class="inputSection">
-          <input
-            type="text"
-            value=""
-            placeholder="Add your new todo"
-          />
-          <button id="todo_add" disabled>Add</button>
-      </div>
-    <ul class="TodoList">
-    </ul>
-    <div>
-        <span>You have <span></span> pending tasks </span>
-        <button>Clear All</button>
-    </div>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo App</title>
+  <script src="./dist/app.js" defer></script>
+</head>
+
+<body>
+  <div class="inputSection">
+    <input type="text" value="" placeholder="Add your new todo" />
+    <button id="todo_add" disabled>Add</button>
+  </div>
+  <ul class="TodoList">
+  </ul>
+  <div>
+    <span>You have <span class="pendingNumber"></span> pending tasks </span>
+    <button class="clearAll">Clear All</button>
+  </div>
+</body>
+
 </html>
